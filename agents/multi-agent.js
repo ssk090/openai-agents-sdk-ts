@@ -18,9 +18,22 @@ const combinedAgent = new Agent({
     handoffs: [historyAgent, mathAgent],
 })
 
+// this just prints the final output
+// async function main() {
+//     const response = await run(combinedAgent, "Who was the first president of the United States?");
+//     console.log(response.finalOutput);
+
+// }
+// this streams the output as it is generated
 async function main() {
-    const response = await run(combinedAgent, "Who was the first president of the United States?");
-    console.log(response.finalOutput);
+    const response = await run(combinedAgent, "Who was the first president of the United States? explain please", {
+        stream: true
+    });
+    response
+        .toTextStream({
+            compatibleWithNodeStreams: true,
+        })
+        .pipe(process.stdout);
 }
 
 main();
