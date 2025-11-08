@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { Agent, run } from "@openai/agents";
 import { weatherTool, sendEmailTool } from "../tools/index.js";
 
